@@ -1,0 +1,8 @@
+wordpressUsername: "${wordpressUsername}"
+wordpressPassword: "${wordpressPassword}"
+wordpressEmail:  "${wordpressEmail}"
+wordpressFirstName: "${wordpressFirstName}"
+wordpressLastName: "${wordpressLastName}"
+wordpressBlogName: "${wordpressBlogName}"
+service: 
+  type: LoadBalancer
