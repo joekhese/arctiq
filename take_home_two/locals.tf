@@ -4,22 +4,9 @@ locals {
     mission = "training"
   }
   services = [
-    # "cloudkms.googleapis.com",
     "compute.googleapis.com",
     "container.googleapis.com",
-    # "containerregistry.googleapis.com",
-    # "deploymentmanager.googleapis.com",
-    # "iamcredentials.googleapis.com",
-    # "iam.googleapis.com",
-    # "oslogin.googleapis.com",
-    # "pubsub.googleapis.com",
-    # "replicapool.googleapis.com",
-    # "replicapoolupdater.googleapis.com",
-    # "resourceviews.googleapis.com",
-    # "servicenetworking.googleapis.com",
-    # "sqladmin.googleapis.com",
-    # "storage-api.googleapis.com",
-    # "storage-component.googleapis.com",
+    
   ]
   billing_account     = "013645-1B15BB-BAD8A2"
   project_id          = "joe-training"
