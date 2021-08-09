@@ -20,10 +20,10 @@ locals {
     "roles/iam.serviceAccountKeyAdmin",
     "roles/gkehub.admin"
   ]
-  billing_account     = "013283-34C035-A27D00"
+  billing_account     = ""
   project_id          = "joe-training"
   project_name        = "joe-training"
-  ip_cidr_range       = "10.121.0.0/20" // change to a smaller range
+  ip_cidr_range       = "10.121.0.0/20" 
   secondary_range     = "10.121.128.0/21"
   secondary_range-two = "10.121.64.0/22"
   asm_version         = "1.9"
