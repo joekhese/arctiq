@@ -81,10 +81,10 @@ module "gke" {
   ip_range_services        = "${local.project_name}-sec-subnet-two"
   http_load_balancing      = local.gke.http_load_balancing
   network_policy           = local.gke.network_policy
-  remove_default_node_pool = local.gke.remove_default_node_pool 
-  node_metadata            = "GKE_METADATA_SERVER"      
-  cluster_resource_labels = local.labels
-  node_pools              = local.gke.node_pool.pools
+  remove_default_node_pool = local.gke.remove_default_node_pool
+  node_metadata            = "GKE_METADATA_SERVER"
+  cluster_resource_labels  = local.labels
+  node_pools               = local.gke.node_pool.pools
 
 }
 
