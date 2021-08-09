@@ -8,16 +8,16 @@
     "version": "3.76.0"
   },
   "registry.terraform.io/hashicorp/google-beta": {
-    "hash": "h1:eMncaieZcBrqeK240/uZMGEv4vaeuOjp4Hy9Njcnx58=",
-    "version": "3.77.0"
+    "hash": "h1:cdM0uOfoGIsEYxTq4VDYpylQs6yDJF5dRP5qmyqKHYI=",
+    "version": "3.78.0"
   },
   "registry.terraform.io/hashicorp/helm": {
     "hash": "h1:liBgOoOXhA2A1DbL0oaifyNnoGOyHxMG4+xD1Kl58XA=",
     "version": "2.2.0"
   },
   "registry.terraform.io/hashicorp/kubernetes": {
-    "hash": "h1:qxMfKMH8V4m+6oWbH8l/6LvvBJx5NEbJoXruL2OgNsI=",
-    "version": "2.3.2"
+    "hash": "h1:RpE4kNQYkGxIyHyIEHXcdt/vKCtTVU2NNzTrOK4hb9E=",
+    "version": "2.4.1"
   },
   "registry.terraform.io/hashicorp/null": {
     "hash": "h1:xhbHC6in3nQryvTQBWKxebi3inG5OCgHgc4fRxL0ymc=",

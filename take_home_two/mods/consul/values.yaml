@@ -1,0 +1,27 @@
+# helm-consul-values.yaml
+# global:
+#   datacenter: ${datacenter}
+
+
+ui:
+  service:
+    enabled: true
+    type: 'LoadBalancer'
+
+
+global:
+  name: ${name}
+  datacenter: ${datacenter}
+
+server:
+  # use 1 server
+  replicas: 3
+
+connectInject:
+  enabled: true
+  # inject an envoy sidecar into every new pod,
+  default: true
+
+# enable CRDs
+controller:
+  enabled: true

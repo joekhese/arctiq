@@ -6,3 +6,4 @@ wordpressLastName: "${wordpressLastName}"
 wordpressBlogName: "${wordpressBlogName}"
 service: 
   type: LoadBalancer
+

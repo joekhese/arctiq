@@ -11,8 +11,8 @@ locals {
   count              = var.enabled == true ? 1 : 0
   name               = "wordpress"
   wordpressUsername  = "jagbonkhese"
-  wordpressPassword  = ""
-  wordpressEmail     = ""
+  wordpressPassword  = "YoijKLhhy190"
+  wordpressEmail     = "joekhese@gmail.com"
   wordpressFirstName = "joseph"
   wordpressLastName  = "agbonkhese"
   wordpressBlogName  = "joekhese.com"

@@ -10,21 +10,21 @@ resource "google_project" "joe-training" {
   name            = "${local.project_name}-${random_string.suffix.result}"
   project_id      = "${local.project_name}-${random_string.suffix.result}"
   billing_account = local.billing_account
-  skip_delete     = true
+  //skip_delete     = true
   labels          = local.labels
 }
 
-resource "google_project_service" "joe-training_services" {
-  for_each                   = toset(local.services)
-  project                    = google_project.joe-training.project_id
-  service                    = each.value
-  disable_dependent_services = true
-  disable_on_destroy         = true
-  timeouts {
-    create = "30m"
-    update = "30m"
-  }
-}
+# resource "google_project_service" "joe-training_services" {
+#   for_each                   = toset(local.services)
+#   project                    = google_project.joe-training.project_id
+#   service                    = each.value
+#   disable_dependent_services = true
+#   disable_on_destroy         = true
+#   timeouts {
+#     create = "30m"
+#     update = "30m"
+#   }
+# }
 
 
 
@@ -78,18 +78,66 @@ module "gke" {
   zones                    = local.gke.multi_az == true ? data.google_compute_zones.available.names : list(data.google_compute_zones.available.names.0)
   network                  = module.vpc.network_name
   subnetwork               = module.vpc.subnets_names[0]
-  ip_range_pods            = "${local.project_name}-sec-subnet"     // find out the use
-  ip_range_services        = "${local.project_name}-sec-subnet-two" // find out the use
+  ip_range_pods            = "${local.project_name}-sec-subnet"     
+  ip_range_services        = "${local.project_name}-sec-subnet-two" 
   http_load_balancing      = local.gke.http_load_balancing
-  network_policy           = local.gke.network_policy           // // find out the use
+  network_policy           = local.gke.network_policy          
   remove_default_node_pool = local.gke.remove_default_node_pool //// find out the use
-  node_metadata            = "GKE_METADATA_SERVER"              // find out
-
+  node_metadata            = "GKE_METADATA_SERVER"              // workload identity
+  //identity_namespace      = "enabled" # This is required for ASM
   cluster_resource_labels = local.labels
+  node_pools = local.gke.node_pool.pools
+
 }
 
-module "woerpress" {
+module "wordpress" {
   source            = "./mods/wordpress"
   enabled           = true
-  module_depends_on = [module.gke.ca_certificate]
 }
+
+module "consul" {
+  source            = "./mods/consul"
+  enabled           = true
+  module_depends_on = [module.gke.endpoint]
+}
+
+resource "kubernetes_namespace" "webapp" {
+  metadata {
+    name = "web-app"
+  }
+}
+
+# # Use Kubectl to apply the Mysql manifest
+# resource "kubectl_manifest" "api-deployment" {
+#   yaml_body = templatefile("./k8s_config/api.yaml", {
+
+#   })
+
+#   depends_on = [kubernetes_namespace.webapp]
+# }
+
+# resource "kubectl_manifest" "web-deployment" {
+#   yaml_body = templatefile("./k8s_config/web.yaml", {
+#   })
+
+#   depends_on = [kubernetes_namespace.webapp]
+# }
+
+module "project-services" {
+  source  = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "10.1.1"
+
+  project_id                  = google_project.joe-training.project_id
+
+  activate_apis = [
+    "compute.googleapis.com",
+    "iam.googleapis.com",
+    "container.googleapis.com",
+  ]
+}
+
+
+output "zones" {
+  value = data.google_compute_zones.available.names
+}
+
