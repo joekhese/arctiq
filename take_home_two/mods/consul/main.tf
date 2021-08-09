@@ -1,8 +1,8 @@
 locals {
   //enabled = true
-  count = var.enabled == true ? 1 : 0
-  name = "consul"
-  replicas = 1
+  count      = var.enabled == true ? 1 : 0
+  name       = "consul"
+  replicas   = 1
   datacenter = "arctiq"
 
 }
@@ -20,8 +20,8 @@ variable "module_depends_on" {
 
 
 resource "helm_release" "consul" {
-  count = var.enabled == true ? 1 : 0
-  name  = local.name
+  count            = var.enabled == true ? 1 : 0
+  name             = local.name
   repository       = "https://helm.releases.hashicorp.com"
   chart            = "consul"
   create_namespace = true
@@ -30,7 +30,7 @@ resource "helm_release" "consul" {
   values = [
     templatefile("${path.module}/values.yaml", {
       datacenter = local.datacenter,
-      name = local.name
+      name       = local.name
     })
   ]
 }
