@@ -1,7 +1,3 @@
-# helm-consul-values.yaml
-# global:
-#   datacenter: ${datacenter}
-
 
 ui:
   service:

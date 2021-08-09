@@ -22,14 +22,11 @@ variable "module_depends_on" {
 resource "helm_release" "consul" {
   count = var.enabled == true ? 1 : 0
   name  = local.name
-  //name = "${local.name}-${random_string.vault_suffix.result}" 
   repository       = "https://helm.releases.hashicorp.com"
   chart            = "consul"
   create_namespace = true
   namespace        = "consul"
-  //version          = "0.31.1"
 
-  //namespace = kubernetes_namespace.vault[count.index].metadata.0.name
   values = [
     templatefile("${path.module}/values.yaml", {
       datacenter = local.datacenter,

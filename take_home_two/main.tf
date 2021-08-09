@@ -10,7 +10,6 @@ resource "google_project" "joe-training" {
   name            = "${local.project_name}-${random_string.suffix.result}"
   project_id      = "${local.project_name}-${random_string.suffix.result}"
   billing_account = local.billing_account
-  //skip_delete     = true
   labels          = local.labels
 }
 
@@ -106,22 +105,6 @@ resource "kubernetes_namespace" "webapp" {
     name = "web-app"
   }
 }
-
-# # Use Kubectl to apply the Mysql manifest
-# resource "kubectl_manifest" "api-deployment" {
-#   yaml_body = templatefile("./k8s_config/api.yaml", {
-
-#   })
-
-#   depends_on = [kubernetes_namespace.webapp]
-# }
-
-# resource "kubectl_manifest" "web-deployment" {
-#   yaml_body = templatefile("./k8s_config/web.yaml", {
-#   })
-
-#   depends_on = [kubernetes_namespace.webapp]
-# }
 
 module "project-services" {
   source  = "terraform-google-modules/project-factory/google//modules/project_services"
