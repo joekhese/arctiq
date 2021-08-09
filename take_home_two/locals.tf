@@ -26,7 +26,7 @@ locals {
   ip_cidr_range       = "10.121.0.0/20" // change to a smaller range
   secondary_range     = "10.121.128.0/21"
   secondary_range-two = "10.121.64.0/22"
-  asm_version = "1.9"
+  asm_version         = "1.9"
 
   public  = "10.121.0.0/18"
   managed = "10.121.64.0/18"
@@ -48,23 +48,23 @@ locals {
         max_count    = 2
       }]
       oauth_scopes = {
-        all               = ["https://www.googleapis.com/auth/cloud-platform"]
+        all          = ["https://www.googleapis.com/auth/cloud-platform"]
         my-node-pool = []
       }
       labels = {
-        all               = {}
+        all          = {}
         my-node-pool = {}
       }
       metadata = {
-        all               = {}
+        all          = {}
         my-node-pool = {}
       }
       taints = {
-        all               = []
+        all          = []
         my-node-pool = []
       }
       tags = {
-        all               = []
+        all          = []
         my-node-pool = []
       }
     }

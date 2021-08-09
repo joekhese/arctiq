@@ -77,21 +77,21 @@ module "gke" {
   zones                    = local.gke.multi_az == true ? data.google_compute_zones.available.names : list(data.google_compute_zones.available.names.0)
   network                  = module.vpc.network_name
   subnetwork               = module.vpc.subnets_names[0]
-  ip_range_pods            = "${local.project_name}-sec-subnet"     
-  ip_range_services        = "${local.project_name}-sec-subnet-two" 
+  ip_range_pods            = "${local.project_name}-sec-subnet"
+  ip_range_services        = "${local.project_name}-sec-subnet-two"
   http_load_balancing      = local.gke.http_load_balancing
-  network_policy           = local.gke.network_policy          
+  network_policy           = local.gke.network_policy
   remove_default_node_pool = local.gke.remove_default_node_pool //// find out the use
   node_metadata            = "GKE_METADATA_SERVER"              // workload identity
   //identity_namespace      = "enabled" # This is required for ASM
   cluster_resource_labels = local.labels
-  node_pools = local.gke.node_pool.pools
+  node_pools              = local.gke.node_pool.pools
 
 }
 
 module "wordpress" {
-  source            = "./mods/wordpress"
-  enabled           = true
+  source  = "./mods/wordpress"
+  enabled = true
 }
 
 module "consul" {
@@ -110,7 +110,7 @@ module "project-services" {
   source  = "terraform-google-modules/project-factory/google//modules/project_services"
   version = "10.1.1"
 
-  project_id                  = google_project.joe-training.project_id
+  project_id = google_project.joe-training.project_id
 
   activate_apis = [
     "compute.googleapis.com",
